@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Room Status</title>
+</head>
+<body>
+<h1>Room Status</h1>
+{% if room_list %}
+    <ul>
+    {% for room in room_list %}
+        <li>Room number : <a href="{% url 'RoomManage:detail' room.room_num %}">{{ room.room_num }}</a>  Status : {{ room.room_status }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+<a href="{% url 'RoomManage:index' %}">room index</a>
+</body>
+</html>

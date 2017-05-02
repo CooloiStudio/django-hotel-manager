@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Room Detail</title>
+</head>
+<body>
+<h1>ROOM DETAIL</h1>
+{{ message }}<br/>
+ Room number : {{ room.room_num }} <br/>
+ Room price : {{ room.room_price }} <br/>
+ Room type : {{ room.room_type }} <br/>
+{% if custom %}
+   <br/> custom info
+    <ul>
+     <li>custom name : {{ custom.custom_name }}</li>
+     <li>custom gender : {{ custom.custom_gender }} </li>
+     <li>custom id : {{ custom.custom_id }}</li>
+     <li>custom phone number : {{ custom.phone_num }}</li>
+    </ul>
+    <br/>
+{% endif %}
+{% if order %}
+    order info<br/>
+    Reserve Date : {{ order.reserve_date }}<br/>
+{% endif %}
+{% if bill %}
+    bill<br/>
+    <ul>
+    <li>Reserve Date : {{ bill.reserve_date }}</li>
+    <li>checking date : {{ bill.check_in_date }}</li>
+    <li>deposit : {{ bill.deposit }}</li>
+    <li>cost : {{ bill.cost }}</li>
+    </ul>
+{% endif %}
+
+<a href="{% url 'RoomManage:room_status' %}">room status</a><br/>
+<a href="{% url 'RoomManage:index' %}">room index</a>
+</body>
+</html>

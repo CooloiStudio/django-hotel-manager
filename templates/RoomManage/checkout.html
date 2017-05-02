@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Check Out</title>
+</head>
+<body>
+<h1>CHECK OUT</h1>
+{% if room_list %}
+    <ul>
+    {% for room in room_list %}
+        <li> room number :<a href="{% url 'RoomManage:custom_checkout' room.room_num %}"> {{room.room_num  }}</a></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+<a  href="{% url 'RoomManage:index' %}">room index</a>
+</body>
+</html>

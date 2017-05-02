@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add item</title>
+</head>
+<body>
+{% if item_list %}
+    <form action="" method="post">
+    {% csrf_token %}
+        <ul>
+            {% for item in item_list %}
+                <li>item name: {{ item.name }}  </li>
+                amount: <input type="text" name="amount_{{ item.id }}" value="0"/>  price: <input type="text" name="price_{{ item.id }}" value="0"/>
+            {% endfor %}
+        </ul>
+        <input type="submit" value="submit" name="submit"/> <input type="submit" value="submit return" name="submit_return">
+    </form>
+    <a href="{% url 'ItemManage:add_room_item' room_num %}">cancel</a>
+{% endif %}
+<br/>
+<a href="{% url 'ItemManage:index' %}">item index</a>
+</body>
+</html>

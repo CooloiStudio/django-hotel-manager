@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Room Item Detail</title>
+</head>
+<body>
+<h1>ROOM ITEM DETAIL</h1>
+<p1>Room Number {{ room_num }}</p1>
+{% if item_list %}
+    <ul>
+    {% for item in item_list %}
+        <li>item name: {{ item.item_name.name }}  item amount:{{ item.amount }} item price {{ item.price }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <br/><p2>there is no item in this room </p2>
+    <br/><a href="{% url 'ItemManage:add_room_item' room_num %}">add item</a>
+{% endif %}<br/>
+<a href="{% url 'ItemManage:index' %}">return</a>
+</body>
+</html>

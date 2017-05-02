@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Detail</title>
+</head>
+<body>
+<h1>DETAIL</h1>
+   task context : {{ task.context }} <br/>
+   task date : {{ task.date }} <br/>
+   task status : {{ task.task_status }} <br/>
+   room : {{ task.room }}<br/>
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="submit" name="done" value="done">
+    </form>
+
+<a href="{% url 'TaskManage:tasklist' %}">task list</a>
+</body>
+</html>

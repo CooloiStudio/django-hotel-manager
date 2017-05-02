@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Checkout</title>
+</head>
+<body>
+<h1>CUSTOM CHECK OUT</h1>
+{% if bill and cost_item_list %}
+      <h1>BILL DETAIL</h1><br/>
+    <ul>
+    <li>reserve Date: {{ bill.reserve_date }}</li>
+    <li>checking date: {{ bill.check_in_date }}</li>
+    <li>checkout date: {{ bill.check_out_date }}<li/>
+    <li>deposit: {{ bill.deposit }}</li>
+        <ul>
+            {% for cost_item in cost_item_list %}
+                <li>item name: {{ cost_item.name }}  amount: {{ cost_item.amount }} price: {{ cost_item.price }}</li>
+            {% endfor %}
+        </ul>
+    <li>cost: {{ bill.cost }}</li>
+    </ul>
+    <a href="{% url 'RoomManage:checkout' %}">checkout</a>
+{% endif %}
+
+
+{% if items_list %}
+    <form action="" method="post">
+    {% csrf_token %}
+        <ul>
+            {% for item in items_list %}
+                <li>item name : {{ item.item_name }}  <input name="{{ item.id }}" type="text" value="0"></li>
+            {% endfor %}
+        </ul>
+        <input type="submit" value="submit"/> <a href="{% url 'RoomManage:custom_checkout' room_num %}">cancel</a>
+    </form>
+{% endif %}
+<a href="{% url 'RoomManage:checkout' %}">return</a>
+</body>
+</html>

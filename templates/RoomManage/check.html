@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Check Room</title>
+</head>
+<body>
+<h1>UNCHECK ROOM LIST</h1>
+{% if room_list %}
+    <ul>
+    {% for room in room_list %}
+        <li>room number : {{ room.room_num }}   type : {{ room.room_type }}   price : {{ room.room_price }}</li>
+        <a href="{% url 'RoomManage:custom_reserve' room.room_num %}">reserve</a> <a href="{% url 'RoomManage:custom_checkin' room.room_num %}">checkin</a>
+
+    {% endfor %}
+    </ul>
+{% else %}
+ <p>room is all checked</p>
+{% endif %}
+
+<a href="{% url 'RoomManage:index' %}">index</a>
+</body>
+</html>
