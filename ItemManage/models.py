@@ -21,3 +21,7 @@ class RoomItem(models.Model):
     def __str__(self):
         return 'Room number : ' + str(self.room.room_num)
 
+
+
+
+
