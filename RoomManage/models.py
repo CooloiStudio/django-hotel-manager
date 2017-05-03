@@ -38,7 +38,7 @@ class Bills(models.Model):
 
 class Cost_Item(models.Model):
     name = models.CharField(max_length=100)
-    amount = models.IntegerField(max_length=5)
+    amount = models.IntegerField()
     price = models.DecimalField(max_digits=5, decimal_places=2)
     bill = models.ForeignKey(Bills)
 

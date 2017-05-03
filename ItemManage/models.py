@@ -6,7 +6,7 @@ from RoomManage.models import Room
 
 class Item(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    amount = models.IntegerField(max_length=7)
+    amount = models.IntegerField()
 
     def __str__(self):
         return self.name
@@ -15,7 +15,7 @@ class Item(models.Model):
 class RoomItem(models.Model):
     room = models.ForeignKey(Room)
     item_name = models.ForeignKey(Item, to_field='name')
-    amount = models.IntegerField(max_length=3, default=0)
+    amount = models.IntegerField(default=0)
     price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
 
     def __str__(self):
