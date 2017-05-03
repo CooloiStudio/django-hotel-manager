@@ -14,6 +14,7 @@ def index(request):
     room_list = Room.objects.all()
     return render(request,'ItemManage/index.html',{'room_list': room_list})
 
+
 @login_required()
 def add_room_item(request, room_num):
     try:

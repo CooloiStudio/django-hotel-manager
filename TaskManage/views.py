@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http.response import HttpResponseRedirect
 from django.http import HttpRequest
 from django.urls import reverse
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required,permission_required
 from django.utils import timezone
 from django.contrib.auth.models import User
 
@@ -15,7 +15,6 @@ from RoomManage.views import Room_Status
 @login_required()
 def index(request):
     clock_status = True
-
     if request.method == 'POST':
         if 'clockin' in request.POST:
             attendance = Attendance.objects.create(clock_in=timezone.now(),
@@ -63,6 +62,7 @@ def detail(request, task_num):
 
 
 @login_required()
+@permission_required('Emergency.create_emergency')
 def emergency(request):
     room_list = Room.objects.filter(room_status=room_status.checking)
     user_list = User.objects.all().exclude(is_superuser=True)

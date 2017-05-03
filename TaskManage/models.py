@@ -31,3 +31,8 @@ class Emergency(models.Model):
 
     def __str__(self):
         return 'date time:' + str(self.date_time)
+
+    class Meta:
+        permissions = (
+            ('create_emergency', 'can create a emergency'),
+        )
