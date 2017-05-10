@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recruitment</title>
+</head>
+<body>
+<h1>Recruitment</h1>
+{% if recruitment %}
+    <h3>position: {{ recruitment.position }}</h3>
+
+    <h4>base information: {{ recruitment.baseinfo }}</h4>
+
+    <h4>required skill: {{ recruitment.required }}</h4>
+{% endif %}
+
+<a href="{% url 'RecruitManage:position' %}">all position</a>
+</body>
+</html>

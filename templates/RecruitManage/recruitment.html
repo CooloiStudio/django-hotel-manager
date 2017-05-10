@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Position</title>
+</head>
+<body>
+<h1>Position</h1>
+{% if recruitment_list %}
+    <ul>
+        {% for recruitment in recruitment_list %}
+            <li><a href="{% url 'RecruitManage:detail' recruitment.position %}">{{ recruitment.position }}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}
+</body>
+</html>
