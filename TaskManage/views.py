@@ -78,6 +78,7 @@ def emergency(request):
                                         user=user,
                                         room=room)
         emer.save()
+        create_task(user, room, date)
 
         if 'submit' in request.POST:
             return HttpResponseRedirect(reverse('TaskManage:emergence'))
@@ -86,6 +87,15 @@ def emergency(request):
 
     return render(request, 'TaskManage/emergency.html', {'room_list':room_list, 'user_list':user_list})
 
+
+def create_task(user, room, date):
+
+    task = Task.objects.create(user=user,
+                               room=room,
+                               date=date,
+                               context='Emergency',
+                               task_status=task_status.undo)
+    task.save()
 
 class Task_Status(object):
     def __init__(self):

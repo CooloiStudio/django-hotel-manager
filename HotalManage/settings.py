@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'RoomManage.apps.RoommanageConfig',
     'TaskManage.apps.TaskmanageConfig',
     'ItemManage.apps.ItemmanageConfig',
+    'RecruitManage.apps.RecruitmanageConfig',
 ]
 
 MIDDLEWARE = [

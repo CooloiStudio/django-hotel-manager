@@ -22,9 +22,10 @@ from .viwes import home
 urlpatterns = [
     url(r'^$', home),
     url(r'^admin/', admin.site.urls),
-    url(r'^roommanage/',include('RoomManage.urls')),
-    url(r'^taskmanage/',include('TaskManage.urls')),
-    url(r'^itemmanage/',include('ItemManage.urls')),
-    url(r'^login/$',login,{'template_name':'Account/login.html'}),
-    url(r'^logout/$',logout_then_login),
+    url(r'^roommanage/', include('RoomManage.urls')),
+    url(r'^taskmanage/', include('TaskManage.urls')),
+    url(r'^itemmanage/', include('ItemManage.urls')),
+    url(r'^recruitmanage/', include('RecruitManage.urls')),
+    url(r'^login/$', login,{'template_name':'Account/login.html'}),
+    url(r'^logout/$', logout_then_login),
 ]

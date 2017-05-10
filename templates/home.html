@@ -2,11 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Horal Manage</title>
+    <title>Hotel Manage</title>
 </head>
 <body>
 <a href="{% url 'ItemManage:index' %}">Item Manage</a><br/>
 <a href="{% url 'RoomManage:index' %}">Room Manage</a><br/>
 <a href="{% url 'TaskManage:index' %}">Task Manage</a><br/>
+
+<h3>recruitment information</h3>
+{% if recruitment_list %}
+    <ul>
+        {% for recruitment in recruitment_list %}
+            <li><a href="{% url 'RecruitManage:detail' recruitment.position %}">{{ recruitment.position }}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<h3>undo task</h3>
+{% if task_list %}
+    <ul>
+        {% for task in task_list %}
+           <li>task context: {{ task.context }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
 </body>
 </html>
