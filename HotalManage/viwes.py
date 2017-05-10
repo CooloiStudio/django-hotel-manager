@@ -9,4 +9,5 @@ def home(request):
    recruitment_list = Recruitment.objects.all()[:3]
    task_list = Task.objects.filter(task_status=task_status.undo)
 
-   return render(request, template, {'recruitment_list': recruitment_list, 'task_list': task_list})
+   context = {'recruitment_list': recruitment_list, 'task_list': task_list}
+   return render(request, template, context)
