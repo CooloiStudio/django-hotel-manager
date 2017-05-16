@@ -1,28 +1,248 @@
 {% extends "base.html" %}
-
+{% load static from staticfiles %}
 {% block body %}
-<body>
-<a href="{% url 'ItemManage:index' %}">Item Manage</a><br/>
-<a href="{% url 'RoomManage:index' %}">Room Manage</a><br/>
-<a href="{% url 'TaskManage:index' %}">Task Manage</a><br/>
+    <body>
 
-<h3>recruitment information</h3>
-{% if recruitment_list %}
-    <ul>
-        {% for recruitment in recruitment_list %}
-            <li><a href="{% url 'RecruitManage:detail' recruitment.position %}">{{ recruitment.position }}</a></li>
-        {% endfor %}
-    </ul>
-{% endif %}
+    <div class="header">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fa fa-paper-plane"></i> ONE酒店管理</a>
+            <div class="menu">
+                <a class="toggleMenu" href="index.html#" style="display: none;">
+                    <img src="{% static 'images/nav_icon.png' %}" alt=""> </a>
+                <ul class="nav" id="nav">
+                    <li class="current"><a href="/">首页</a></li>
+                    <li><a href="{% url 'RoomManage:index' %}">房间管理</a></li>
+                    <li><a href="{% url 'TaskManage:index' %}">任务管理</a></li>
+                    <li><a href="{% url 'ItemManage:index' %}">物品管理</a></li>
+                    <div class="clear"></div>
+                </ul>
+                <script type="text/javascript" src="{% static 'js/responsive-nav.js' %}"></script>
+            </div>
+        </div>
+    </div>
+    <div class="banner text-center">
+        <div class="container">
+            <div class="banner-info">
+                <h1>ONE酒店管理</h1>
+                <p>电子科技大学成都学院13级 J1701043小组</p>
+                <a class="banner_btn" href="{% url 'RoomManage:index' %}">房间管理</a></div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="content_white">
+            <h2>基础功能</h2>
+            <p>包含房间管理、任务管理、物品管理、招聘管理</p>
+        </div>
+        <div class="featured_content" id="feature">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-md-3 col-xs-3 feature_grid1"><i class="fa fa-globe fa-3x"></i>
+                        <h3 class="m_1"><a href="{% url 'RoomManage:index' %}">房间管理</a></h3>
+                        <p class="m_2">房间详情、预订、入住、退房</p>
+                        <a href="{% url 'RoomManage:index' %}" class="feature_btn">More</a></div>
+                    <div class="col-mg-3 col-xs-3 feature_grid1"><i class="fa fa-cog fa-3x"></i>
+                        <h3 class="m_1"><a href="{% url 'TaskManage:index' %}">任务管理</a></h3>
+                        <p class="m_2">任务列表、紧急状况</p>
+                        <a href="{% url 'TaskManage:index' %}" class="feature_btn">More</a></div>
+                    <div class="col-md-3 col-xs-3 feature_grid1"><i class="fa fa-history fa-3x"></i>
+                        <h3 class="m_1"><a href="{% url 'ItemManage:index' %}">物品管理</a></h3>
+                        <p class="m_2">检查每个房间的物品使用情况</p>
+                        <a href="{% url 'ItemManage:index' %}" class="feature_btn">More</a></div>
+                    <div class="col-mg-3 col-xs-3 feature_grid2"><i class="fa fa-comments-o fa-3x"></i>
+                        <h3 class="m_1"><a href="services.html">招聘信息</a></h3>
+                        <p class="m_2">显示最近招聘需求</p>
+                        <a href="services.html" class="feature_btn">More</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="about-info">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="block-heading-two">
+                            <h2><span>About Our Company</span></h2>
+                        </div>
+                        <p>Consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
+                            aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
+                            suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor
+                            in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla
+                            facilisis at vero.</p>
+                        <br>
+                        <p>Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
+                            wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut
+                            aliquip ex ea commodo consequat.</p>
+                        <a class="banner_btn" href="about.html">Read More</a></div>
+                    <div class="col-md-4">
+                        <div class="block-heading-two">
+                            <h3><span>Our Advantages</span></h3>
+                        </div>
+                        <div class="panel-group" id="accordion-alt3">
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion-alt3"
+                                                               href="index.html#collapseOne-alt3"> <i
+                                            class="fa fa-angle-right"></i> Quisque cursus metus vitae pharetra
+                                        auctor</a></h4>
+                                </div>
+                                <div id="collapseOne-alt3" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <p>Consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
+                                            laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
+                                            quis nostrud exerci tation ullamcorper suscipit.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion-alt3"
+                                                               href="index.html#collapseTwo-alt3"> <i
+                                            class="fa fa-angle-right"></i> Duis autem vel eum iriure dolor in hendrerit</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseTwo-alt3" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <p>Consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
+                                            laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
+                                            quis nostrud exerci tation ullamcorper suscipit.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion-alt3"
+                                                               href="index.html#collapseThree-alt3"> <i
+                                            class="fa fa-angle-right"></i> Quisque cursus metus vitae pharetra auctor
+                                    </a></h4>
+                                </div>
+                                <div id="collapseThree-alt3" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <p>Consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
+                                            laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
+                                            quis nostrud exerci tation ullamcorper suscipit.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion-alt3"
+                                                               href="index.html#collapseFour-alt3"> <i
+                                            class="fa fa-angle-right"></i> Duis autem vel eum iriure dolor in hendrerit</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseFour-alt3" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <p>Consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
+                                            laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
+                                            quis nostrud exerci tation ullamcorper suscipit.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="highlight-info">
+            <div class="overlay spacer">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-sm-3 col-xs-6"><i class="fa fa-smile-o fa-5x"></i>
+                            <h4>120+ Happy Clients</h4>
+                        </div>
+                        <div class="col-sm-3 col-xs-6"><i class="fa fa-check-square-o fa-5x"></i>
+                            <h4>600+ Projects Completed</h4>
+                        </div>
+                        <div class="col-sm-3 col-xs-6"><i class="fa fa-trophy fa-5x"></i>
+                            <h4>25 Awards Won</h4>
+                        </div>
+                        <div class="col-sm-3 col-xs-6"><i class="fa fa-map-marker fa-5x"></i>
+                            <h4>3 Offices</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-area">
+            <div class="testimonial-solid">
+                <div class="container">
+                    <h2>Client Testimonials</h2>
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class=""><a
+                                    href="index.html#"></a></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1" class=""><a
+                                    href="index.html#"></a></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="2" class=""><a
+                                    href="index.html#"></a></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="3" class="active"><a
+                                    href="index.html#"></a></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item">
+                                <p>"Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+                                    euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad
+                                    minim veniam quis nostrud exerci tation."</p>
+                                <p><strong>- John Doe -</strong></p>
+                            </div>
+                            <div class="item">
+                                <p>"Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+                                    euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad
+                                    minim veniam quis nostrud exerci tation."</p>
+                                <p><strong>- Jane Doe -</strong></p>
+                            </div>
+                            <div class="item">
+                                <p>"Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+                                    euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad
+                                    minim veniam quis nostrud exerci tation."</p>
+                                <p><strong>- John Smith -</strong></p>
+                            </div>
+                            <div class="item active">
+                                <p>"Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+                                    euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad
+                                    minim veniam quis nostrud exerci tation."</p>
+                                <p><strong>- Linda Smith -</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="footer_bottom">
+                <div class="follow-us"><a class="fa fa-facebook social-icon" href="index.html#"></a> <a
+                        class="fa fa-twitter social-icon" href="index.html#"></a> <a class="fa fa-linkedin social-icon"
+                                                                                     href="index.html#"></a> <a
+                        class="fa fa-google-plus social-icon" href="index.html#"></a></div>
+                <div class="copy">
+                    <p>Copyright © 2015 Company Name. Design by <a href="http://www.templategarden.com/" rel="nofollow">TemplateGarden</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <script src="{% static 'js/jquery.flexslider.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
 
-<h3>undo task</h3>
-{% if task_list %}
-    <ul>
-        {% for task in task_list %}
-           <li>task context: {{ task.context }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
+    </div>
 
-</body>
+
+    <h3>recruitment information</h3>
+    {% if recruitment_list %}
+        <ul>
+            {% for recruitment in recruitment_list %}
+                <li><a href="{% url 'RecruitManage:detail' recruitment.position %}">{{ recruitment.position }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <h3>undo task</h3>
+    {% if task_list %}
+        <ul>
+            {% for task in task_list %}
+                <li>task context: {{ task.context }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+    </body>
 {% endblock %}

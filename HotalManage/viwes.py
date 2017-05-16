@@ -4,10 +4,11 @@ from RecruitManage.models import Recruitment
 from TaskManage.models import Task
 from TaskManage.views import task_status
 
-def home(request):
-   template = 'home.html'
-   recruitment_list = Recruitment.objects.all()[:3]
-   task_list = Task.objects.filter(task_status=task_status.undo)
 
-   context = {'recruitment_list': recruitment_list, 'task_list': task_list}
-   return render(request, template, context)
+def home(request):
+    template = 'home.html'
+    recruitment_list = Recruitment.objects.all()[:3]
+    task_list = Task.objects.filter(task_status=task_status.undo)
+
+    context = {'recruitment_list': recruitment_list, 'task_list': task_list}
+    return render(request, template, context)
