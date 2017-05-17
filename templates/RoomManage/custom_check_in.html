@@ -1,0 +1,58 @@
+{% extends 'RoomManage/index.html' %}
+{% load static from staticfiles %}
+{% block room_block %}
+  <h1>入住已定客房</h1>
+  <br>
+
+  <div class="contact_bottom">
+    <h3>入住信息</h3>
+    <p>客房号: {{ room_num }}</p>
+    {% if message %}
+      {{ message }}
+      <br/>
+    {% endif %}
+    <form action="" method="post">
+      {% csrf_token %}
+      <div class="contact-to">
+        <input type="text" class="text" placeholder="姓名" name="name">
+        <input type="text" class="text" placeholder="证件号码" name="id" style="margin-left: 10px">
+        <input type="text" class="text" placeholder="电话号码" name="phone_num" style="margin-left: 10px">
+      </div>
+      <div class="text2">
+        custom gender :
+        <select name="gender">
+          <option value="male">male</option>
+          <option value="female">female</option>
+        </select>
+      </div>
+      <div>
+        <input class="submit" type="submit" value="确认">
+        <a href="{% url 'RoomManage:custom_check_in' room_num %}">取消</a>
+      </div>
+
+
+    </form>
+  </div>
+
+{#    <h1>CUSTOM CHECK IN</h1>#}
+{#    {% if message %}#}
+{#      {{ message }}<br/>#}
+{#    {% endif %}#}
+{##}
+{#    <form action="" method="post">#}
+{#      {% csrf_token %}#}
+{#      custom name : <input type="text" name="name"/><br/>#}
+{#      custom gender : <select name="gender">#}
+{#      <option value="male">male</option>#}
+{#      <option value="female">female</option>#}
+{#    </select>#}
+{#      <br/>#}
+{#      custom id : <input type="text" name="id"/><br/>#}
+{#      phone number : <input type="text" name="phone_num"><br/>#}
+{#      <input class="submit" type="submit" value="submit">#}
+{#      <a href="{% url 'RoomManage:custom_check_in' room_num %}">cancel</a>#}
+{#    </form>#}
+{#    <a href="{% url 'RoomManage:check' %}">return check</a>#}
+
+
+{% endblock %}

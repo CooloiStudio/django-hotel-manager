@@ -1,40 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Room Detail</title>
-</head>
-<body>
-<h1>ROOM DETAIL</h1>
-{{ message }}<br/>
- Room number : {{ room.room_num }} <br/>
- Room price : {{ room.room_price }} <br/>
- Room type : {{ room.room_type }} <br/>
-{% if custom %}
-   <br/> custom info
-    <ul>
-     <li>custom name : {{ custom.custom_name }}</li>
-     <li>custom gender : {{ custom.custom_gender }} </li>
-     <li>custom id : {{ custom.custom_id }}</li>
-     <li>custom phone number : {{ custom.phone_num }}</li>
-    </ul>
-    <br/>
-{% endif %}
-{% if order %}
-    order info<br/>
-    Reserve Date : {{ order.reserve_date }}<br/>
-{% endif %}
-{% if bill %}
-    bill<br/>
-    <ul>
-    <li>Reserve Date : {{ bill.reserve_date }}</li>
-    <li>checking date : {{ bill.check_in_date }}</li>
-    <li>deposit : {{ bill.deposit }}</li>
-    <li>cost : {{ bill.cost }}</li>
-    </ul>
-{% endif %}
+{% extends 'RoomManage/index.html' %}
+{% load static from staticfiles %}
+{% block room_block %}
+  <div class="container">
+    <h1>入住已定客房</h1>
+    <br>
 
-<a href="{% url 'RoomManage:room_status' %}">room status</a><br/>
-<a href="{% url 'RoomManage:index' %}">room index</a>
-</body>
-</html>
+    <h1>ROOM DETAIL</h1>
+    {{ message }}
+    <br/>
+    房号 : {{ room.room_num }} <br/>
+    价格 : {{ room.room_price }} <br/>
+    类型 : {{ room.room_type }} <br/>
+    <br/>
+    {% if custom %}
+      <div class="row contact_top">
+        <div class="col-md-9 contact_details">
+          <h5>custom info</h5>
+          <div>
+            <span>
+              custom name : {{ custom.custom_name }}
+              <br>
+              custom gender : {{ custom.custom_gender }}
+              <br>
+              custom id : {{ custom.custom_id }}
+              <br>
+              custom phone number : {{ custom.phone_num }}
+            </span>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+    {% if order %}
+      <div class="row contact_top">
+        <div class="col-md-9 contact_details">
+          <h5>order info</h5>
+          <div>
+            <span>
+              Reserve Date : {{ order.reserve_date }}
+            </span>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+    {% if bill %}
+      <div class="row contact_top">
+        <div class="col-md-9 contact_details">
+          <h5>bill info</h5><br/>
+          <div>
+            <span>
+              Reserve Date : {{ bill.reserve_date }}
+              <br>
+              check_ing date : {{ bill.check_in_date }}
+              <br>
+              deposit : {{ bill.deposit }}
+              <br>
+              cost : {{ bill.cost }}
+            </span>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+
+  <a href="{% url 'RoomManage:room_status' %}">返回列表</a><br/>
+
+{% endblock %}

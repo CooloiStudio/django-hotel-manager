@@ -1,8 +1,10 @@
+# coding: utf-8
+
 from django.shortcuts import render
 from django.http.response import HttpResponseRedirect
 from django.http import HttpRequest
 from django.urls import reverse
-from django.contrib.auth.decorators import login_required,permission_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.utils import timezone
 from django.contrib.auth.models import User
 
@@ -11,6 +13,7 @@ from RoomManage.models import Room
 from RoomManage.views import Room_Status
 
 # Create your views here.
+
 
 @login_required()
 def index(request):
@@ -64,7 +67,7 @@ def detail(request, task_num):
 @login_required()
 @permission_required('Emergency.create_emergency')
 def emergency(request):
-    room_list = Room.objects.filter(room_status=room_status.checking)
+    room_list = Room.objects.filter(room_status=room_status.check_ing)
     user_list = User.objects.all().exclude(is_superuser=True)
 
     if request.method == 'POST':

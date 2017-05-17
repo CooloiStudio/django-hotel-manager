@@ -1,18 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Room Status</title>
-</head>
-<body>
-<h1>Room Status</h1>
-{% if room_list %}
-    <ul>
-    {% for room in room_list %}
-        <li>Room number : <a href="{% url 'RoomManage:detail' room.room_num %}">{{ room.room_num }}</a>  Status : {{ room.room_status }}</li>
-    {% endfor %}
-    </ul>
-{% endif %}
-<a href="{% url 'RoomManage:index' %}">room index</a>
-</body>
-</html>
+{% extends 'RoomManage/index.html' %}
+{% load static from staticfiles %}
+{% block room_block %}
+  <h1>入住已定客房</h1>
+  <br>
+  <div class="container">
+    {% if room_list %}
+      <div class="row contact_top">
+        {% for room in room_list %}
+          <div class="col-md-3 contact_details">
+            <h5>房号 : {{ room.room_num }}</h5>
+            <br/>
+            <div>
+            <span>
+              客房类型 : {{ room.room_type }}
+              <br>
+              价格 : {{ room.room_price }}
+              <br>
+              状态 : {{ room.room_status }}
+              <br>
+            </span>
+              <a href="{% url 'RoomManage:detail' room.room_num %}">查看详情</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+    {% else %}
+      <p>room is all checked</p>
+    {% endif %}
+  </div>
+
+
+{#  <h1>Room Status</h1>#}
+{#  {% if room_list %}#}
+{#    <ul>#}
+{#      {% for room in room_list %}#}
+{#        <li>Room number : <a href="{% url 'RoomManage:detail' room.room_num %}">#}
+{#          {{ room.room_num }}#}
+{#        </a>#}
+{#          Status : {{ room.room_status }}</li>#}
+{#      {% endfor %}#}
+{#    </ul>#}
+{#  {% endif %}#}
+
+{% endblock %}

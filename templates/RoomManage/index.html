@@ -1,15 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Room Index</title>
-</head>
-<body>
-<h1>ROOM INDEX</h1>
-<a href="{% url 'RoomManage:check' %}">check</a><br/>
-<a href="{% url 'RoomManage:checkout' %}">checkout</a><br/>
-<a href="{% url 'RoomManage:check_reserved' %}">check reserved</a><br/>
-<a href="{% url 'RoomManage:room_status' %}">room status</a>
+{% extends "base.html" %}
+{% load static from staticfiles %}
+{% block body %}
 
-</body>
-</html>
+  <div class="about">
+    <div class="container">
+      <section class="title-section">
+        <h1 class="title-header">客房管理</h1>
+      </section>
+    </div>
+  </div>
+
+  <div class="contact">
+    <div class="container">
+      <div class="row contact_top">
+        <div class="col-md-3 contact_details">
+          <h5><a href="{% url 'RoomManage:check' %}">空房列表</a></h5>
+          <br/>
+          <div>办理预订与入住</div>
+        </div>
+        <div class="col-md-3 contact_details">
+          <h5><a href="{% url 'RoomManage:checkout' %}">客房结账</a></h5>
+          <br/>
+          <div>办理退订 客房结账<br>
+          </div>
+        </div>
+        <div class="col-md-3 contact_details">
+          <h5><a href="{% url 'RoomManage:check_reserved' %}">入住已定客房</a></h5>
+          <br/>
+          <div>已经预订客房，在此办理入住</div>
+        </div>
+        <div class="col-md-3 contact_details">
+          <h5><a href="{% url 'RoomManage:room_status' %}">客房状态</a></h5>
+          <br/>
+          <div>查看所有客房</div>
+        </div>
+      </div>
+  <hr>
+
+  {% block room_block %}
+
+  {% endblock %}
+    </div>
+  </div>
+
+
+{% endblock %}

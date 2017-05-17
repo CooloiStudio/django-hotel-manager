@@ -9,7 +9,10 @@
 {% if recruitment_list %}
     <ul>
         {% for recruitment in recruitment_list %}
-            <li><a href="{% url 'RecruitManage:detail' recruitment.position %}">{{ recruitment.position }}</a></li>
+            <li><a href="{% url 'RecruitManage:detail' recruitment.id %}">
+                {{ recruitment.detail }} {{ recruitment.name }}
+            </a></li>
+
         {% endfor %}
     </ul>
 {% endif %}
