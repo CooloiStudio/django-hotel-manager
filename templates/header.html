@@ -1,0 +1,19 @@
+{% load static from staticfiles %}
+
+<div class="header">
+  <div class="container">
+    <a class="navbar-brand" href="index.html"><i class="fa fa-paper-plane"></i> ONE酒店管理</a>
+    <div class="menu">
+      <a class="toggleMenu" href="index.html#" style="display: none;">
+        <img src="{% static 'images/nav_icon.png' %}" alt=""> </a>
+      <ul class="nav" id="nav">
+        <li><a href="/">首页</a></li>
+        <li><a href="{% url 'RoomManage:index' %}">客房管理</a></li>
+        <li><a href="{% url 'TaskManage:index' %}">任务管理</a></li>
+        <li><a href="{% url 'ItemManage:index' %}">物品管理</a></li>
+        <div class="clear"></div>
+      </ul>
+      <script type="text/javascript" src="{% static 'js/responsive-nav.js' %}"></script>
+    </div>
+  </div>
+</div>
