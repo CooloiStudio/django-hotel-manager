@@ -2,98 +2,106 @@
 {% load static from staticfiles %}
 {% block room_block %}
   <h1>结账退房</h1>
-  <br>
 
   <div class="contact_bottom">
-{% if bill and cost_item_list %}
-      <h1>BILL DETAIL</h1><br/>
-    <ul>
-    <li>reserve Date: {{ bill.reserve_date }}</li>
-    <li>check_ing date: {{ bill.check_in_date }}</li>
-    <li>checkout date: {{ bill.check_out_date }}<li/>
-    <li>deposit: {{ bill.deposit }}</li>
-        <ul>
-            {% for cost_item in cost_item_list %}
-                <li>item name: {{ cost_item.name }}  amount: {{ cost_item.amount }} price: {{ cost_item.price }}</li>
-            {% endfor %}
-        </ul>
-    <li>cost: {{ bill.cost }}</li>
-    </ul>
-    <a href="{% url 'RoomManage:checkout' %}">checkout</a>
-{% endif %}
-
-
-{% if items_list %}
-    <form action="" method="post">
-    {% csrf_token %}
-        <ul>
-            {% for item in items_list %}
-                <li>item name : {{ item.item_name }}  <input name="{{ item.id }}" type="text" value="0"></li>
-            {% endfor %}
-        </ul>
-        <input type="submit" value="submit"/> <a href="{% url 'RoomManage:custom_checkout' room_num %}">cancel</a>
-    </form>
-{% endif %}
-<a href="{% url 'RoomManage:checkout' %}">return</a>
-    <h3>账单信息</h3>
     <p>客房号: {{ room_num }}</p>
     {% if message %}
       {{ message }}
       <br/>
     {% endif %}
-    <form action="" method="post">
-      {% csrf_token %}
-      <div class="contact-to">
-        <input type="text" class="text" placeholder="姓名" name="name">
-        <input type="text" class="text" placeholder="证件号码" name="id" style="margin-left: 10px">
-        <input type="text" class="text" placeholder="电话号码" name="phone_num" style="margin-left: 10px">
-      </div>
-      <div class="text2">
-        custom gender :
-        <select name="gender">
-          <option value="male">male</option>
-          <option value="female">female</option>
-        </select>
-      </div>
-      <div>
-        <input class="submit" type="submit" value="确认"><h1>{{ room_num }}</h1>
+
+    {% if bill and cost_item_list %}
+    <h3>账单信息</h3>
+      <ul>
+        <li>预订时间: {{ bill.reserve_date }}</li>
+        <li>入住时间: {{ bill.check_in_date }}</li>
+        <li>结账时间: {{ bill.check_out_date }}</li>
+        <li>押　　金: {{ bill.deposit }}</li>
+        <li>物品消耗: </li>
+        <div class="contact_details">
+          <table class="table">
+            <thead>
+            <td></td>
+            <td>物品名称</td>
+            <td>数量</td>
+            <td>单价</td>
+            </thead>
+            <tbody>
+            {% for cost_item in cost_item_list %}
+              <tr>
+                <td><i class="fa fa-angle-right"></i></td>
+                <td>{{ cost_item.name }}</td>
+                <td>{{ cost_item.amount }}</td>
+                <td>{{ cost_item.price }}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <li>总　　计: {{ bill.cost }}</li>
+      </ul>
+      <a href="{% url 'RoomManage:checkout' %}" class="submit">确认</a>
+    {% endif %}
+
+
+    {% if items_list %}
+    <h3>物品消耗</h3>
+      <form action="" method="post">
+        {% csrf_token %}
+        <div class="contact-to">
+        <table class="table table-striped">
+        <thead>
+        <tr>
+          <td>物品名称</td>
+          <td>数量</td>
+        </tr>
+        </thead>
+        <tbody>
+          {% for item in items_list %}
+            <tr>
+            <td><p>{{ item.item_name }}</p></td>
+            <td><input name="{{ item.id }}" type="text" class="text" value="0"></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+        </table>
+        </div>
+        <input type="submit" class="submit" value="确认"/>
         <a href="{% url 'RoomManage:custom_checkout' room_num %}">取消</a>
-      </div>
-
-
-    </form>
+      </form>
+    {% endif %}
   </div>
 
-<h1>CUSTOM CHECK OUT</h1>
-{% if bill and cost_item_list %}
-      <h1>BILL DETAIL</h1><br/>
-    <ul>
-    <li>reserve Date: {{ bill.reserve_date }}</li>
-    <li>check_ing date: {{ bill.check_in_date }}</li>
-    <li>checkout date: {{ bill.check_out_date }}</li>
-    <li>deposit: {{ bill.deposit }}</li>
-        <ul>
-            {% for cost_item in cost_item_list %}
-                <li>item name: {{ cost_item.name }}  amount: {{ cost_item.amount }} price: {{ cost_item.price }}</li>
-            {% endfor %}
-        </ul>
-    <li>cost: {{ bill.cost }}</li>
-    </ul>
-    <a href="{% url 'RoomManage:checkout' %}">checkout</a>
-{% endif %}
+  {#  <h1>CUSTOM CHECK OUT</h1>#}
+{#  {% if bill and cost_item_list %}#}
+{#    <h1>BILL DETAIL</h1><br/>#}
+{#    <ul>#}
+{#      <li>reserve Date: {{ bill.reserve_date }}</li>#}
+{#      <li>check_ing date: {{ bill.check_in_date }}</li>#}
+{#      <li>checkout date: {{ bill.check_out_date }}</li>#}
+{#      <li>deposit: {{ bill.deposit }}</li>#}
+{#      <ul>#}
+{#        {% for cost_item in cost_item_list %}#}
+{#          <li>item name: {{ cost_item.name }} amount: {{ cost_item.amount }} price: {{ cost_item.price }}</li>#}
+{#        {% endfor %}#}
+{#      </ul>#}
+{#      <li>cost: {{ bill.cost }}</li>#}
+{#    </ul>#}
+{#    <a href="{% url 'RoomManage:checkout' %}">checkout</a>#}
+{#  {% endif %}#}
 
 
-{% if items_list %}
-    <form action="" method="post">
-    {% csrf_token %}
-        <ul>
-            {% for item in items_list %}
-                <li>item name : {{ item.item_name }}  <input name="{{ item.id }}" type="text" value="0"></li>
-            {% endfor %}
-        </ul>
-        <input type="submit" value="submit"/> <a href="{% url 'RoomManage:custom_checkout' room_num %}">cancel</a>
-    </form>
-{% endif %}
-<a href="{% url 'RoomManage:checkout' %}">return</a>
+  {#  {% if items_list %}#}
+  {#    <form action="" method="post">#}
+  {#      {% csrf_token %}#}
+  {#      <ul>#}
+  {#        {% for item in items_list %}#}
+  {#          <li>item name : {{ item.item_name }} <input name="{{ item.id }}" type="text" value="0"></li>#}
+  {#        {% endfor %}#}
+  {#      </ul>#}
+  {#      <input type="submit" value="submit"/> <a href="{% url 'RoomManage:custom_checkout' room_num %}">cancel</a>#}
+  {#    </form>#}
+  {#  {% endif %}#}
+  {#  <a href="{% url 'RoomManage:checkout' %}">return</a>#}
 
 {% endblock %}

@@ -57,8 +57,6 @@ def custom_check_in(request, room_num):
     except:
         return HttpResponseRedirect(reverse('RoomManage:check'))
 
-    template_name = 'RoomManage/custom_check_in.html'
-
     context = {
         'title': title,
         'room_num': room_num
@@ -82,7 +80,7 @@ def custom_check_in(request, room_num):
         except:
             context = dict({'message': '还有空白信息'}, **context)
 
-    return render(request, template_name, context)
+    return render(request, 'RoomManage/custom_check_in.html', context)
 
 
 @login_required()
@@ -93,8 +91,6 @@ def custom_reserve(request, room_num):
             raise KeyError
     except:
         return HttpResponseRedirect(reverse('RoomManage:check'))
-
-    template_name = 'RoomManage/custom_reserve.html'
 
     context = {
         'title': title,
@@ -116,7 +112,7 @@ def custom_reserve(request, room_num):
         except:
             context = dict({'message': '还有空白信息'}, **context)
 
-    return render(request, template_name, context)
+    return render(request, 'RoomManage/custom_reserve.html', context)
 
 
 @login_required()
@@ -138,7 +134,7 @@ def custom_unreserved(request, room_num):
 
     if request.method == 'POST':
         room.room_status = status.uncheck
-        order.status= order_status.done
+        order.status = order_status.done
         room.save()
         order.save()
         return HttpResponseRedirect(reverse('RoomManage:checkout'))
@@ -167,8 +163,6 @@ def custom_checkout(request, room_num):
     except:
         return HttpResponseRedirect(reverse('RoomManage:checkout'))
 
-    template_name = 'RoomManage/custom_checkout.html'
-
     if request.method == 'POST':
         cost_dict = dict()
         for item in items_list:
@@ -188,14 +182,14 @@ def custom_checkout(request, room_num):
             'cost_item_list': cost_item_list,
             'room_num': room_num
         }
-        return render(request, template_name, context)
+        return render(request, 'RoomManage/custom_checkout.html', context)
 
     context = {
         'title': title,
         'items_list': items_list,
         'room_num': room_num
     }
-    return render(request, template_name, context)
+    return render(request, 'RoomManage/custom_checkout.html', context)
 
 
 @login_required()
@@ -225,13 +219,16 @@ class Room_Status(object):
         self.check_ing = '已入住'
         self.reserved = '已预订'
 
+
 class Order_Status(object):
     def __init__(self):
         self.ordering = '未完成'
         self.done = '已完成'
 
+
 status = Room_Status()
 order_status = Order_Status()
+
 
 def room_context(room):
     if room.room_status == status.uncheck:
