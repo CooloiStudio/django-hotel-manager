@@ -5,15 +5,15 @@
     <title>Recruitment</title>
 </head>
 <body>
-<h1>Recruitment</h1>
+<h1>招聘详情</h1>
 {% if recruitment %}
-    <h3>position: {{ recruitment.position }}</h3>
+    <h3>职位: {{ recruitment.position }}</h3>
 
-    <h4>base information: {{ recruitment.baseinfo }}</h4>
+    <h4>基本信息: {{ recruitment.baseinfo }}</h4>
 
-    <h4>required skill: {{ recruitment.required }}</h4>
+    <h4>技能要求: {{ recruitment.required }}</h4>
 {% endif %}
 
-<a href="{% url 'RecruitManage:position' %}">all position</a>
+<a href="{% url 'RecruitManage:position' %}">所有职位</a>
 </body>
 </html>

@@ -6,23 +6,23 @@
 </head>
 <body>
 <h1>TASK INDEX</h1>
-<a href="{% url 'TaskManage:tasklist' %}">Task list</a>
+<a href="{% url 'TaskManage:tasklist' %}">任务列表</a>
 
 {% if clock_status %}
     <form action="" method="post">
         {% csrf_token %}
-        <input type="submit" value="clock in" name="clockin">
+        <input type="submit" value="打卡" name="clock_in">
     </form>
 
 {% else %}
     <form action="" method="post">
         {% csrf_token %}
-        <input type="submit" value="clock out" name="clockout">
+        <input type="submit" value="clock out" name="clock_out">
     </form>
 {% endif %}
 
 {% if perms.TaskManage.add_emergency %}
-<a href="{% url 'TaskManage:emergence' %}">emergence</a>
+<a href="{% url 'TaskManage:emergence' %}">紧急事件</a>
 {% endif %}
 </body>
 </html>

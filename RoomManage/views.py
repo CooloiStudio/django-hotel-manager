@@ -80,7 +80,7 @@ def custom_check_in(request, room_num):
             create_check_in_bill(cus[0], room)
             return HttpResponseRedirect(reverse('RoomManage:detail', args=(room_num,)))
         except:
-            context = dict({'message': 'don`t submit blank'}, **context)
+            context = dict({'message': '还有空白信息'}, **context)
 
     return render(request, template_name, context)
 
@@ -114,7 +114,34 @@ def custom_reserve(request, room_num):
             create_order(cus[0], room)
             return HttpResponseRedirect(reverse('RoomManage:detail', args=(room_num,)))
         except:
-            context = dict({'message': 'don`t submit blank'}, **context)
+            context = dict({'message': '还有空白信息'}, **context)
+
+    return render(request, template_name, context)
+
+
+@login_required()
+def custom_unreserved(request, room_num):
+    try:
+        room = Room.objects.get(room_num=room_num)
+        if room.room_status != status.reserved:
+            raise KeyError
+    except:
+        return HttpResponseRedirect(reverse('RoomManage:check'))
+
+    order = Orders.objects.get(status=order_status.ordering, room=room)
+    context = {
+        'title': title,
+        'room_num': room_num,
+        'order': order
+    }
+    template_name = 'RoomManage/custom_unreserved.html'
+
+    if request.method == 'POST':
+        room.room_status = status.uncheck
+        order.status= order_status.done
+        room.save()
+        order.save()
+        return HttpResponseRedirect(reverse('RoomManage:checkout'))
 
     return render(request, template_name, context)
 
@@ -158,7 +185,8 @@ def custom_checkout(request, room_num):
         context = {
             'title': title,
             'bill': bill,
-            'cost_item_list': cost_item_list
+            'cost_item_list': cost_item_list,
+            'room_num': room_num
         }
         return render(request, template_name, context)
 
@@ -193,13 +221,17 @@ def detail(request, room_num):
 
 class Room_Status(object):
     def __init__(self):
-        self.uncheck = 'uncheck'
-        self.check_ing = 'check_ing'
-        self.reserved = 'reserved'
+        self.uncheck = '未入住'
+        self.check_ing = '已入住'
+        self.reserved = '已预订'
 
+class Order_Status(object):
+    def __init__(self):
+        self.ordering = '未完成'
+        self.done = '已完成'
 
 status = Room_Status()
-
+order_status = Order_Status()
 
 def room_context(room):
     if room.room_status == status.uncheck:
@@ -207,12 +239,16 @@ def room_context(room):
         return {'message': message, 'room': room}
     elif room.room_status == status.reserved:
         message = '该客房被已被预定'
-        order = Orders.objects.get(room=room.id)  # try?
+        order = None
+        order_list = Orders.objects.filter(room=room.id)  # try?
+        for o in order_list:
+            if Room.objects.get(id=o.room_id).room_status == status.reserved and o.status == order_status.ordering:
+                order = o
         custom = Customs.objects.get(id=order.custom.id)
         return {'message': message, 'order': order, 'custom': custom, 'room': room}
     elif room.room_status == status.check_ing:
         message = '该客房已被入住'
-        bill = Bills.objects.get(room=room.id)
+        bill = Bills.objects.get(room=room.id, check_out_date=None)
         custom = Customs.objects.get(id=bill.custom.id)
         return {'message': message, 'bill': bill, 'custom': custom, 'room': room}
     else:
@@ -240,6 +276,8 @@ def create_check_in_bill(custom, room):
         for order in order_list:
             if order.room.room_status == status.reserved:
                 reserve_date = order.reserve_date
+                order.status = order_status.done
+                order.save()
     except:
         pass
     bill = Bills.objects.create(deposit=100,

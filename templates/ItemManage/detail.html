@@ -6,17 +6,17 @@
 </head>
 <body>
 <h1>ROOM ITEM DETAIL</h1>
-<p1>Room Number {{ room_num }}</p1>
+<p1>房间号 {{ room_num }}</p1>
 {% if item_list %}
     <ul>
     {% for item in item_list %}
-        <li>item name: {{ item.item_name.name }}  item amount:{{ item.amount }} item price {{ item.price }}</li>
+        <li>物品名称: {{ item.item_name.name }}  数量:{{ item.amount }} 价格: {{ item.price }}</li>
     {% endfor %}
     </ul>
 {% else %}
-    <br/><p2>there is no item in this room </p2>
-    <br/><a href="{% url 'ItemManage:add_room_item' room_num %}">add item</a>
+    <br/><p2>该房间没有物品 </p2>
+    <br/><a href="{% url 'ItemManage:add_room_item' room_num %}">添加物品</a>
 {% endif %}<br/>
-<a href="{% url 'ItemManage:index' %}">return</a>
+<a href="{% url 'ItemManage:index' %}">返回</a>
 </body>
 </html>

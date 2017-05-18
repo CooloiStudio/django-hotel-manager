@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% if room_num %}
+    <h2>房间号:{{ room_num }}</h2>
+{% endif %}
+{% if order %}
+    顾客名字:{{ order.custom.custom_name }}<br/>
+    电话号码:{{ order.custom.phone_num }}<br/>
+    预定日期:{{ order.reserve_date }}<br/>
+{% endif %}
+<form action="" method="post">
+    {% csrf_token %}
+    <input type="submit" name="submit" value="退订" >
+</form>
+<a href="{% url 'RoomManage:checkout' %}">返回</a>
+</body>
+</html>

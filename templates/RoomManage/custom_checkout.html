@@ -56,8 +56,8 @@
         </select>
       </div>
       <div>
-        <input class="submit" type="submit" value="确认">
-        <a href="{% url 'RoomManage:custom_check_in' room_num %}">取消</a>
+        <input class="submit" type="submit" value="确认"><h1>{{ room_num }}</h1>
+        <a href="{% url 'RoomManage:custom_checkout' room_num %}">取消</a>
       </div>
 
 
@@ -70,7 +70,7 @@
     <ul>
     <li>reserve Date: {{ bill.reserve_date }}</li>
     <li>check_ing date: {{ bill.check_in_date }}</li>
-    <li>checkout date: {{ bill.check_out_date }}<li/>
+    <li>checkout date: {{ bill.check_out_date }}</li>
     <li>deposit: {{ bill.deposit }}</li>
         <ul>
             {% for cost_item in cost_item_list %}

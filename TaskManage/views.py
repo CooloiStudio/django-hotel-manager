@@ -14,18 +14,19 @@ from RoomManage.views import Room_Status
 
 # Create your views here.
 
+title = '任务管理'
 
 @login_required()
 def index(request):
     clock_status = True
     if request.method == 'POST':
-        if 'clockin' in request.POST:
+        if 'clock_in' in request.POST:
             attendance = Attendance.objects.create(clock_in=timezone.now(),
                                                    clock_out=None,
                                                    user=request.user)
             attendance.save()
-            return render(request,'TaskManage/index.html',{'clock_status':False})
-        elif 'clockout' in request.POST:
+            return render(request,'TaskManage/index.html',{'clock_status': False})
+        elif 'clock_out' in request.POST:
             attendance = Attendance.objects.filter(user=request.user).get(clock_out=None)
             attendance.clock_out = timezone.now()
             attendance.save()
@@ -33,10 +34,14 @@ def index(request):
 
     try:
         if Attendance.objects.filter(user=request.user).get(clock_out=None):
-            clock_status =False
+            clock_status = False
     except:
         pass
-    
+
+    context = {
+        'title': title,
+        'clock_status': clock_status,
+    }
     return render(request,'TaskManage/index.html',{'clock_status': clock_status})
 
 
@@ -46,6 +51,10 @@ def tasklist(request):
     if task_list is None:
         return render(request,'TaskManage/index.html')
 
+    context = {
+        'title': title,
+        'task_list': task_list,
+    }
     return render(request,'TaskManage/tasklist.html',{'task_list': task_list})
 
 
@@ -55,12 +64,16 @@ def detail(request, task_num):
     if request.user.id != task.user.id:
         return HttpResponseRedirect(reverse('TaskManage:tasklist'))
 
-    if request.method == 'POST' :
+    if request.method == 'POST':
         if request.POST['done']:
             task.task_status = task_status.done
             task.save()
         return HttpResponseRedirect(reverse('TaskManage:detail',args=(task_num,)))
 
+    context = {
+        'title': title,
+        'task': task,
+    }
     return render(request,'TaskManage/detail.html',{'task': task})
 
 
@@ -88,6 +101,11 @@ def emergency(request):
         elif 'submit_return' in request.POST:
             return HttpResponseRedirect(reverse('TaskManage:index'))
 
+    context = {
+        'title': title,
+        'room_list': room_list,
+        'user_list': user_list
+    }
     return render(request, 'TaskManage/emergency.html', {'room_list':room_list, 'user_list':user_list})
 
 
@@ -96,14 +114,14 @@ def create_task(user, room, date):
     task = Task.objects.create(user=user,
                                room=room,
                                date=date,
-                               context='Emergency',
+                               context='发生紧急事件',
                                task_status=task_status.undo)
     task.save()
 
 class Task_Status(object):
     def __init__(self):
-        self.done = 'done'
-        self.undo = 'undo'
+        self.done = '已完成'
+        self.undo = '未完成'
 
 task_status = Task_Status()
 

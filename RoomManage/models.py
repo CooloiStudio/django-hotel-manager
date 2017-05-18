@@ -9,7 +9,7 @@ class Room(models.Model):
     room_num = models.IntegerField()
     room_type = models.CharField(max_length=15)
     room_price = models.IntegerField()
-    room_status = models.CharField(max_length=15, default='uncheck')
+    room_status = models.CharField(max_length=15, default='未入住')
 
     def __str__(self):
         return 'Room number: ' + str(self.room_num)
@@ -53,6 +53,7 @@ class Orders(models.Model):
     custom = models.ForeignKey(Customs)
     room = models.ForeignKey(Room)
     reserve_date = models.DateTimeField()
+    status = models.CharField(max_length=10, default='未完成')
 
     def __str__(self):
         return 'Order id:' + str(self.id)

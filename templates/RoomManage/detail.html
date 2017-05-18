@@ -15,16 +15,16 @@
     {% if custom %}
       <div class="row contact_top">
         <div class="col-md-9 contact_details">
-          <h5>custom info</h5>
+          <h5>顾客信息</h5>
           <div>
             <span>
-              custom name : {{ custom.custom_name }}
+              顾客姓名: {{ custom.custom_name }}
               <br>
-              custom gender : {{ custom.custom_gender }}
+              顾客性别: {{ custom.custom_gender }}
               <br>
-              custom id : {{ custom.custom_id }}
+              身份证号: {{ custom.custom_id }}
               <br>
-              custom phone number : {{ custom.phone_num }}
+              电话号码: {{ custom.phone_num }}
             </span>
           </div>
         </div>
@@ -33,10 +33,10 @@
     {% if order %}
       <div class="row contact_top">
         <div class="col-md-9 contact_details">
-          <h5>order info</h5>
+          <h5>订单信息</h5>
           <div>
             <span>
-              Reserve Date : {{ order.reserve_date }}
+              预定日期: {{ order.reserve_date }}
             </span>
           </div>
         </div>
@@ -45,16 +45,16 @@
     {% if bill %}
       <div class="row contact_top">
         <div class="col-md-9 contact_details">
-          <h5>bill info</h5><br/>
+          <h5>账单信息</h5><br/>
           <div>
             <span>
-              Reserve Date : {{ bill.reserve_date }}
+              预定日期: {{ bill.reserve_date }}
               <br>
-              check_ing date : {{ bill.check_in_date }}
+              入住日期: {{ bill.check_in_date }}
               <br>
-              deposit : {{ bill.deposit }}
+              定金: {{ bill.deposit }}
               <br>
-              cost : {{ bill.cost }}
+              消费: {{ bill.cost }}
             </span>
           </div>
         </div>

@@ -5,11 +5,11 @@
     <title>Room Item List</title>
 </head>
 <body>
-<h1>ROOM LIST</h1>
+<h1>房间列表</h1>
 {% if room_list %}
     <ul>
     {% for room in room_list %}
-        <li>room number:<a href="{% url 'ItemManage:add_room_item' room.room_num %}">{{ room.room_num }}</a> <a href="{%  url 'ItemManage:detail' room.room_num%}"> detail</a></li>
+        <li>房间号:<a href="{% url 'ItemManage:add_room_item' room.room_num %}">{{ room.room_num }}</a> <a href="{%  url 'ItemManage:detail' room.room_num%}"> 详情</a></li>
     {% endfor %}
     </ul>
 {% endif %}

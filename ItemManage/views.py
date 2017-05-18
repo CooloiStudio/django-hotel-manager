@@ -11,10 +11,17 @@ from RoomManage.models import Room
 import decimal
 # Create your views here.
 
+title = '物品管理'
+
 @login_required()
 def index(request):
     room_list = Room.objects.all()
-    return render(request,'ItemManage/index.html',{'room_list': room_list})
+    context = {
+        'title': title,
+        'room_list': room_list,
+    }
+
+    return render(request,'ItemManage/index.html', {'room_list': room_list})
 
 
 @login_required()
@@ -57,6 +64,12 @@ def add_room_item(request, room_num):
        elif 'submit_return' in request.POST:
            return HttpResponseRedirect(reverse('ItemManage:index'))
 
+    context = {
+        'title': title,
+        'item_list': item_list,
+        'room_num': room_num
+    }
+
     return render(request,'ItemManage/add_room_item.html',{'item_list': item_list, 'room_num': room_num})
 
 
@@ -64,5 +77,10 @@ def add_room_item(request, room_num):
 def detail(request, room_num):
     room = Room.objects.get(room_num=room_num)
     item_list = RoomItem.objects.filter(room=room)
+    context = {
+        'title': title,
+        'item_list': item_list,
+        'room_num': room_num
+    }
     return render(request, 'ItemManage/detail.html', {'item_list':item_list, 'room_num':room_num})
 
