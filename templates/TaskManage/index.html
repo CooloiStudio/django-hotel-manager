@@ -1,28 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>INDEX</title>
-</head>
-<body>
-<h1>TASK INDEX</h1>
-<a href="{% url 'TaskManage:tasklist' %}">任务列表</a>
+{% extends 'TaskManage/base.html' %}
+{% load static from staticfiles %}
+{% block check_in_block %}
 
-{% if clock_status %}
-    <form action="" method="post">
-        {% csrf_token %}
-        <input type="submit" value="打卡" name="clock_in">
-    </form>
+      <div class="row contact_top">
+        <div class="col-md-3 contact_details">
+          {% if clock_status %}
+            <form action="" method="post">
+              {% csrf_token %}
+              <input class="submit" type="submit" value="上班打卡" name="clock_in">
+            </form>
+          {% else %}
+            <form action="" method="post">
+              {% csrf_token %}
+              <input class="submit" type="submit" value="下班打卡" name="clock_out">
+            </form>
+          {% endif %}
+          <br/>
+          <div>员工打卡，记录上下班时间</div>
+          <br/>
+        </div>
+      </div>
 
-{% else %}
-    <form action="" method="post">
-        {% csrf_token %}
-        <input type="submit" value="clock out" name="clock_out">
-    </form>
-{% endif %}
-
-{% if perms.TaskManage.add_emergency %}
-<a href="{% url 'TaskManage:emergence' %}">紧急事件</a>
-{% endif %}
-</body>
-</html>
+{% endblock %}

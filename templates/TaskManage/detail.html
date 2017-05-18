@@ -1,20 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>任务详情</title>
-</head>
-<body>
-<h1>详情</h1>
-   任务内容: {{ task.context }} <br/>
-   任务日期: {{ task.date }} <br/>
-   任务状态: {{ task.task_status }} <br/>
-   房间号: {{ task.room }}<br/>
+{% extends 'TaskManage/base.html' %}
+{% load static from staticfiles %}
+{% block task_block %}
+  <h1>任务详情</h1>
+
+  <div class="container">
+    任务日期: {{ task.date }} <br/>
+    任务状态: {{ task.task_status }} <br/>
+    房间号: {{ task.room }}<br/>
+    任务内容:
+    <pre>
+{{ task.context }}
+    </pre>
     <form action="" method="post">
-        {% csrf_token %}
-        <input type="submit" name="done" value="done">
+      {% csrf_token %}
+      <input class="submit" type="submit" name="done" value="完成">
     </form>
 
-<a href="{% url 'TaskManage:tasklist' %}">task list</a>
-</body>
-</html>
+    <a href="{% url 'TaskManage:tasklist' %}">返回列表</a>
+  </div>
+
+{% endblock %}

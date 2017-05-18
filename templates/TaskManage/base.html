@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+{% block body %}
+
+  <div class="about">
+    <div class="container">
+      <section class="title-section">
+        <h1 class="title-header">任务管理</h1>
+      </section>
+    </div>
+  </div>
+
+  <div class="contact">
+    <div class="container">
+      <div class="row contact_top">
+        <div class="col-md-3 contact_details">
+          <h5><a href="{% url 'TaskManage:tasklist' %}">任务列表</a></h5>
+          <br/>
+          <div>查看员工任务<br>
+          </div>
+        </div>
+        {% if perms.TaskManage.add_emergency %}
+          <div class="col-md-3 contact_details">
+            <h5><a href="{% url 'TaskManage:emergence' %}">紧急事件</a></h5>
+            <br/>
+            <div>紧急任务，特殊状况</div>
+          </div>
+        {% endif %}
+      </div>
+
+      {% block check_in_block %}
+
+      {% endblock %}
+
+      <hr>
+
+      {% block task_block %}
+
+      {% endblock %}
+
+    </div>
+  </div>
+
+{% endblock %}

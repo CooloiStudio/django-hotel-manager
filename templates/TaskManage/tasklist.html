@@ -1,19 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>TaskList</title>
-</head>
-<body>
-<h1>任务列表</h1>
-{% if task_list %}
-    <ul>
-    {% for task in task_list %}
-        <li><a href="{% url 'TaskManage:detail' task.id %}"> {{ task.context }}</a>
-    {% endfor %}
-    </ul>
+{% extends 'TaskManage/base.html' %}
+{% load static from staticfiles %}
+{% block task_block %}
 
-{% endif %}
-<a href="{% url 'TaskManage:index' %}">task index</a>
-</body>
-</html>
+  <div class="contact">
+    <div class="container">
+      <div class="row contact_top">
+        {% if task_list %}
+          {% for task in task_list %}
+            <div class="col-md-9 contact_details">
+              <span>
+                {{ task.date }}
+              </span>
+              <br>
+              <a href="{% url 'TaskManage:detail' task.id %}">
+                <span>{{ task.context }}</span>
+              </a>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <a href="{% url 'TaskManage:index' %}">返回列表</a>
+{% endblock %}
