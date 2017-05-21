@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+{% block body %}
+
+  <div class="about">
+    <div class="container">
+      <section class="title-section">
+        <h1 class="title-header">招聘管理</h1>
+      </section>
+    </div>
+  </div>
+
+  <div class="contact">
+    <div class="container">
+      {% block recruitment_block %}
+
+      {% endblock %}
+    </div>
+  </div>
+
+{% endblock %}

@@ -5,9 +5,11 @@ from django.http.response import HttpResponseRedirect
 from django.urls import reverse
 
 from .models import Position, Recruitment
+
 # Create your views here.
 
 title = '招聘管理'
+
 
 def position(request):
     recruitment_list = Recruitment.objects.all()
@@ -15,7 +17,7 @@ def position(request):
         'title': title,
         'recruitment_list': recruitment_list,
     }
-    return render(request, 'RecruitManage/recruitment.html', {'recruitment_list': recruitment_list})
+    return render(request, 'RecruitManage/recruitment.html', context)
 
 
 def detail(request, recruitment_id):
@@ -24,4 +26,4 @@ def detail(request, recruitment_id):
         'title': title,
         'recruitment': recruitment,
     }
-    return render(request, 'RecruitManage/detail.html', {'recruitment': recruitment})
+    return render(request, 'RecruitManage/detail.html', context)

@@ -18,7 +18,8 @@
             价格 : {{ room.room_price }}
               <br>
             </span>
-            <a href="{% url 'RoomManage:custom_check_in' room.room_num %}">入住</a>
+            <a href="{% url 'RoomManage:custom_check_in' room.room_num %}">入住</a> |
+            <a href="{% url 'RoomManage:unreserved' room.room_num %}">退订</a>
           </div>
         </div>
       {% endfor %}

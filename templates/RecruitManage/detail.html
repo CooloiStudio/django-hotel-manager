@@ -1,19 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Recruitment</title>
-</head>
-<body>
-<h1>招聘详情</h1>
-{% if recruitment %}
-    <h3>职位: {{ recruitment.position }}</h3>
+{% extends 'RecruitManage/base.html' %}
+{% load static from staticfiles %}
+{% block recruitment_block %}
 
-    <h4>基本信息: {{ recruitment.baseinfo }}</h4>
 
-    <h4>技能要求: {{ recruitment.required }}</h4>
-{% endif %}
+  <h1>招聘详情</h1>
+  {% if recruitment %}
+    <div class="row contact_top">
 
-<a href="{% url 'RecruitManage:position' %}">所有职位</a>
-</body>
-</html>
+      <div class="col-md-8 contact_details">
+        {{ recruitment.name }}
+      </div>
+      <div class="clear"></div>
+
+      <div class="col-md-8 contact_details">
+        工作岗位: {{ recruitment.position }}
+      </div>
+      <div class="clear"></div>
+
+      <div class="col-md-8 contact_details">
+        基本信息:
+        <pre>{{ recruitment.baseinfo }}</pre>
+      </div>
+      <div class="clear"></div>
+
+      <div class="col-md-8 contact_details">
+        技能要求:
+        <pre>{{ recruitment.required }}</pre>
+      </div>
+    </div>
+    <div class="clear"></div>
+  {% endif %}
+
+  <div class="row contact_top">
+    <a href="{% url 'RecruitManage:position' %}">所有职位</a>
+  </div>
+
+
+{% endblock %}
+
+

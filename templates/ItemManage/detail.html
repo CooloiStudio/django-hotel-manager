@@ -1,22 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Room Item Detail</title>
-</head>
-<body>
-<h1>ROOM ITEM DETAIL</h1>
-<p1>房间号 {{ room_num }}</p1>
-{% if item_list %}
-    <ul>
-    {% for item in item_list %}
-        <li>物品名称: {{ item.item_name.name }}  数量:{{ item.amount }} 价格: {{ item.price }}</li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <br/><p2>该房间没有物品 </p2>
+{% extends "ItemManage/base.html" %}
+{% load static from staticfiles %}
+{% block item_block %}
+
+  <h1>客房内物品详情</h1>
+
+  <h3>房号 {{ room_num }}</h3>
+
+  {% if item_list %}
+    <form action="" method="post">
+      {% csrf_token %}
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <td>物品名称</td>
+          <td>数量</td>
+          <td>价格</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in item_list %}
+          <tr>
+            <td>{{ item.item_name.name }}</td>
+            <td>{{ item.amount }}</td>
+            <td>{{ item.price }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </form>
+  {% else %}
+    <br/>
+    <p2>该房间没有物品</p2>
     <br/><a href="{% url 'ItemManage:add_room_item' room_num %}">添加物品</a>
-{% endif %}<br/>
-<a href="{% url 'ItemManage:index' %}">返回</a>
-</body>
-</html>
+  {% endif %}<br/>
+
+  <br/>
+  <a href="{% url 'ItemManage:index' %}">返回</a>
+
+
+{#  <p1>房间号 {{ room_num }}</p1>#}
+{#  {% if item_list %}#}
+{#    <ul>#}
+{#      {% for item in item_list %}#}
+{#        <li>物品名称: {{ item.item_name.name }} 数量:{{ item.amount }} 价格: {{ item.price }}</li>#}
+{#      {% endfor %}#}
+{#    </ul>#}
+{#  {% else %}#}
+{#    <br/>#}
+{#    <p2>该房间没有物品</p2>#}
+{#    <br/><a href="{% url 'ItemManage:add_room_item' room_num %}">添加物品</a>#}
+{#  {% endif %}<br/>#}
+{#  <a href="{% url 'ItemManage:index' %}">返回</a>#}
+
+{% endblock %}
+

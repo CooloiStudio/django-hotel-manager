@@ -1,17 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Room Item List</title>
-</head>
-<body>
-<h1>房间列表</h1>
-{% if room_list %}
-    <ul>
-    {% for room in room_list %}
-        <li>房间号:<a href="{% url 'ItemManage:add_room_item' room.room_num %}">{{ room.room_num }}</a> <a href="{%  url 'ItemManage:detail' room.room_num%}"> 详情</a></li>
-    {% endfor %}
-    </ul>
-{% endif %}
-</body>
-</html>
+{% extends "ItemManage/base.html" %}
+{% load static from staticfiles %}
+{% block item_block %}
+
+  <h1>房间列表</h1>
+  {% if room_list %}
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <td>房间号</td>
+        <td>调整物品</td>
+        <td>详情</td>
+      </tr>
+      </thead>
+      <tbody>
+      {% for room in room_list %}
+        <tr>
+          <td>{{ room.room_num }}</td>
+          <td><a href="{% url 'ItemManage:add_room_item' room.room_num %}">编辑</a></td>
+          <td><a href="{% url 'ItemManage:detail' room.room_num %}">查看</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+
+
+{% endblock %}

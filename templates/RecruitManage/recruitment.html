@@ -1,20 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Position</title>
-</head>
-<body>
-<h1>职位</h1>
-{% if recruitment_list %}
-    <ul>
-        {% for recruitment in recruitment_list %}
-            <li><a href="{% url 'RecruitManage:detail' recruitment.id %}">
-                {{ recruitment.detail }} {{ recruitment.name }}
-            </a></li>
+{% extends 'RecruitManage/base.html' %}
+{% load static from staticfiles %}
+{% block recruitment_block %}
 
+  <div class="row contact_top">
+    <h1>职位</h1>
+    {% if recruitment_list %}
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <td>工作</td>
+          <td>岗位</td>
+          <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for recruitment in recruitment_list %}
+          <tr>
+            <td>{{ recruitment.name }}</td>
+            <td>{{ recruitment.position }}</td>
+            <td><a href="{% url 'RecruitManage:detail' recruitment.id %}">详情</a></td>
+          </tr>
         {% endfor %}
-    </ul>
-{% endif %}
-</body>
-</html>
+        </tbody>
+      </table>
+    {% endif %}
+  </div>
+{% endblock %}
+

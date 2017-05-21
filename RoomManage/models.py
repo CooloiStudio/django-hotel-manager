@@ -12,7 +12,7 @@ class Room(models.Model):
     room_status = models.CharField(max_length=15, default='未入住')
 
     def __str__(self):
-        return 'Room number: ' + str(self.room_num)
+        return '客房号: ' + str(self.room_num)
 
 
 class Customs(models.Model):
@@ -22,7 +22,7 @@ class Customs(models.Model):
     phone_num = models.IntegerField()
 
     def __str__(self):
-        return 'Custom name: ' + self.custom_name
+        return '客户名: ' + self.custom_name
 
 
 class Bills(models.Model):

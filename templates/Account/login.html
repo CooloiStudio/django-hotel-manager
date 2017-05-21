@@ -1,28 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load static from staticfiles %}
+{% block body %}
 
-{% block content %}
+  <div class="about">
+    <div class="container">
+      <section class="title-section">
+        <h1 class="title-header">用户登录</h1>
+      </section>
+    </div>
+  </div>
 
-  {% if form.errors %}
-    <p class="error">Sorry, that's not a valid username or password</p>
-  {% endif %}
+  <div class="container">
+    <div class="contact_bottom">
 
-  <form action="" method="post">
-  {% csrf_token %}
-    <label for="username">用户名:</label>
-    <input type="text" name="username" value="" id="username"><br/>
-    <label for="password">密码:</label>
-    <input type="password" name="password" value="" id="password">
 
-    <input type="submit" value="登录" />
-    <input type="hidden" name="next" value="{{ next|escape }}" />
-  </form>
+      <div class="col-md-3 contact_details">
+        <h2 class="form-signin-heading">请登录</h2>
+        {% if form.errors %}
+          <p class="error">请输入正确的账号和密码</p>
+        {% endif %}
+
+        <form class="form-signin" action="" method="post">
+          {% csrf_token %}
+          <div class="form-row">
+            <input class="form-control" type="text" name="username" id="username" placeholder="用户名">
+            <input class="form-control" type="password" name="password" id="password" placeholder="密码">
+            <input type="submit" class="submit" value="登录"/>
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+
+  <hr>
 
 {% endblock %}
-</body>
-</html>

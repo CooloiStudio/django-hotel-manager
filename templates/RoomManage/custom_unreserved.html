@@ -1,22 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-{% if room_num %}
-    <h2>房间号:{{ room_num }}</h2>
-{% endif %}
-{% if order %}
-    顾客名字:{{ order.custom.custom_name }}<br/>
-    电话号码:{{ order.custom.phone_num }}<br/>
-    预定日期:{{ order.reserve_date }}<br/>
-{% endif %}
-<form action="" method="post">
-    {% csrf_token %}
-    <input type="submit" name="submit" value="退订" >
-</form>
-<a href="{% url 'RoomManage:checkout' %}">返回</a>
-</body>
-</html>
+{% extends 'RoomManage/index.html' %}
+{% load static from staticfiles %}
+{% block room_block %}
+  <h1>退订客房</h1>
+  <br>
+
+  <div class="contact_bottom">
+    <div class="col-md-6 contact_details">
+      <h3>预订信息</h3>
+
+      {% if room_num %}
+        <p>客房号: {{ room_num }}</p>
+      {% endif %}
+
+      {% if message %}
+        {{ message }}
+        <br/>
+      {% endif %}
+
+      {% if order %}
+        顾客名字: {{ order.custom.custom_name }}<br/>
+        电话号码: {{ order.custom.phone_num }}<br/>
+        预定日期: {{ order.reserve_date }}<br/>
+      {% endif %}
+      <form action="" method="post">
+        {% csrf_token %}
+        <input class="submit" type="submit" name="submit" value="退订">
+        <a href="{% url 'RoomManage:checkout' %}">返回</a>
+      </form>
+
+    </div>
+  </div>
+
+
+      {#      <form action="" method="post">#}
+      {#        {% csrf_token %}#}
+      {#        <div class="contact-to">#}
+      {#          <input type="text" class="text" placeholder="姓名" name="name">#}
+      {#          <input type="text" class="text" placeholder="证件号码" name="id" style="margin-left: 10px">#}
+      {#          <input type="text" class="text" placeholder="电话号码" name="phone_num" style="margin-left: 10px">#}
+      {#        </div>#}
+      {#        <div class="text2">#}
+      {#          顾客性别:#}
+      {#          <select name="gender">#}
+      {#            <option value="male">男</option>#}
+      {#            <option value="female">女</option>#}
+      {#          </select>#}
+      {#        </div>#}
+      {#        <div>#}
+      {#          <input class="submit" type="submit" value="确认">#}
+      {#          <a href="{% url 'RoomManage:custom_check_in' room_num %}">清空</a>#}
+      {#        </div>#}
+      {##}
+      {#      </form>#}
+      {#    </div>#}
+
+{% endblock %}
+
